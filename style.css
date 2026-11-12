@@ -1,0 +1,1046 @@
+/* =========================================================
+   +237-4C Para Salon : feuille de style
+
+   Logique des couleurs :
+   - BLEU   : le début du site, comme le mur du salon
+   - JAUNE  : tout ce qui rappelle le carrelage
+   - ORANGE : uniquement les interactions (boutons, liens, survol)
+   - VIOLET / ROSE : à partir d'Afrodites #2, l'univers du roman-photo
+   ========================================================= */
+
+/* ---------- 1. Variables : couleurs et polices ---------- */
+:root {
+  --blue: #0246A2;       /* mur du salon */
+  --yellow: #E3B94F;     /* carrelage */
+  --orange: #F16301;     /* interactions */
+  --purple: #9177BD;     /* roman-photo */
+  --pink: #E8BFD0;       /* roman-photo (dégradé) */
+  --purple-dark: #2E2147;/* fin du site, version sombre du violet */
+  --pink-light: #F6ECF3; /* fond clair rosé */
+  --cream: #F7F4EE;      /* faïence des lavabos */
+  --black: #1A1A1A;      /* texte */
+  --title: 'Bricolage Grotesque', sans-serif;
+  --text: 'Inter', sans-serif;
+  --hand: 'Patrick Hand', cursive;
+}
+
+/* ---------- 2. Réglages de base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--text);
+  background: var(--cream);
+  color: var(--black);
+  overflow-x: hidden;
+}
+img { width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ---------- 3. En-tête : logo bulle + menu (BLEU) ---------- */
+.entete {
+  position: sticky;            /* reste collé en haut quand on fait défiler */
+  top: 0;
+  z-index: 20;
+  background: var(--blue);
+  border-bottom: 6px solid var(--yellow);  /* rappel du carrelage */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: .6rem 6vw;
+}
+.logo svg { width: 150px; height: auto; display: block; }
+.menu { display: flex; flex-wrap: wrap; gap: 1.4rem; }
+.menu a { color: #fff; font-weight: 700; font-size: .95rem; transition: color .2s; }
+.menu a:hover { color: var(--orange); }   /* ORANGE = interaction */
+.credit-haut {
+  background: var(--black);
+  color: #fff;
+  font-size: .85rem;
+  padding: .45rem 6vw;
+}
+
+/* ---------- 4. Accueil (BLEU) ---------- */
+.hero {
+  min-height: 88vh;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  background: var(--blue);
+  color: #fff;
+}
+.hero-copy {
+  padding: 6vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.sticker-bienvenue {           /* sticker "Bienvenue !" posé de travers */
+  width: 190px;
+  transform: rotate(-4deg);
+  margin-bottom: 26px;
+}
+.hero h1 {
+  font-family: var(--title);
+  font-size: clamp(4rem, 9vw, 8.5rem);
+  line-height: .85;
+  letter-spacing: -.06em;
+}
+.hero h1 span { color: var(--yellow); display: block; }
+.hero .sub { font-family: var(--title); letter-spacing: .33em; margin: 24px 0 28px; }
+.welcome {
+  max-width: 560px;
+  font-family: var(--hand);
+  font-size: 1.45rem;
+  line-height: 1.45;
+}
+.cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+.btn {
+  padding: 16px 24px;
+  border-radius: 999px;
+  font-weight: 800;
+  transition: transform .2s, background .2s;
+}
+.btn:hover { transform: translateY(-3px); }
+.primary { background: var(--orange); color: #fff; }
+.secondary { border: 2px solid #fff; }
+.secondary:hover { border-color: var(--orange); color: var(--orange); }
+.hero-img {
+  background: url('images/salon.jpg') center / cover no-repeat;
+  position: relative;
+  min-height: 420px;
+}
+.hero-img::after {               /* bande de carrelage jaune */
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 24px;
+  background: repeating-linear-gradient(90deg, var(--yellow) 0 46px, #fff6 46px 48px);
+}
+.sticker-ensemble {              /* bulle "On est ensemble" */
+  position: absolute;
+  right: 5%;
+  bottom: 9%;
+  width: min(300px, 70%);
+  transform: rotate(-3deg);
+  filter: drop-shadow(4px 6px 0 rgba(0, 0, 0, .25));
+}
+
+/* ---------- 5. Frise de carrelage jaune entre les sections ---------- */
+.frise {
+  height: 28px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 46px, #fff9 46px 48px),
+    repeating-linear-gradient(0deg, var(--yellow) 0 12px, #fff9 12px 14px);
+}
+
+/* ---------- 6. Sections et titres ---------- */
+section { padding: 100px 6vw; }
+.container { width: min(1350px, 100%); margin: auto; position: relative; }
+.label {                          /* sur-titre numéroté : bleu par défaut, pas orange */
+  font-size: .8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.label::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 4px;
+  background: currentColor;       /* le trait prend la couleur du texte */
+  margin-right: 10px;
+  vertical-align: middle;
+}
+h2 {
+  font-family: var(--title);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1;
+  margin-bottom: 38px;
+}
+.intro { max-width: 720px; line-height: 1.8; font-size: 1.08rem; margin-bottom: 40px; }
+.icone-titre {                    /* petite icône décorative à côté d'un titre */
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 110px;
+  transform: rotate(8deg);
+}
+
+/* ---------- 7. Section 01 : le nom (BLEU) ---------- */
+.nom { background: var(--blue); color: #fff; padding-top: 40px; }
+.nom .label { color: var(--yellow); }
+.name-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.name-card {
+  background: var(--cream);
+  color: var(--black);
+  border: 3px solid var(--black);
+  padding: 40px;
+  box-shadow: 10px 10px 0 var(--yellow);
+}
+.name-card .code {
+  font-family: var(--title);
+  font-size: clamp(4rem, 8vw, 7rem);
+  line-height: 1;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+.name-card p { line-height: 1.75; }
+
+/* ---------- 8. Section 02 : prestations (JAUNE carrelage) ---------- */
+.dimensions { background: var(--yellow); }
+.dimensions .label { color: var(--black); }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.card {
+  background: var(--cream);
+  border: 2px solid var(--black);
+  padding: 30px;
+  min-height: 250px;
+}
+.card img { width: 72px; height: 72px; object-fit: contain; }
+.card h3 { font-family: var(--title); font-size: 1.35rem; margin: 16px 0; }
+.card p { line-height: 1.6; }
+
+/* ---------- 9. Section 03 : galerie (BLEU) ---------- */
+.gallery { background: var(--blue); color: #fff; }
+.gallery .label { color: var(--yellow); }
+.gallery-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 36px;
+}
+.gallery-head p { max-width: 500px; opacity: .85; line-height: 1.7; }
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+.photo {
+  position: relative;
+  overflow: hidden;
+  background: #ccc;
+  min-height: 270px;
+  cursor: zoom-in;
+}
+.photo img { height: 100%; object-fit: cover; transition: .4s; }
+.photo:hover img { transform: scale(1.04); }
+.grid .photo:nth-child(1) { grid-column: span 7; min-height: 430px; }
+.grid .photo:nth-child(2) { grid-column: span 5; min-height: 430px; }
+.grid .photo:nth-child(n+3) { grid-column: span 3; }
+.tag {                            /* étiquette manuscrite */
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  background: var(--cream);
+  color: var(--black);
+  padding: 8px 12px;
+  font-family: var(--hand);
+  font-size: 1.15rem;
+  transform: rotate(-2deg);
+  transition: background .2s, color .2s;
+}
+.photo:hover .tag { background: var(--orange); color: #fff; }  /* ORANGE au survol */
+
+/* ---------- 10. Section 04 : roman-photo (bascule VIOLET / ROSE) ---------- */
+.roman { background: linear-gradient(135deg, var(--pink), var(--purple) 55%, #6655a6); color: #fff; }
+.roman .label { color: #fff; }
+.roman-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 55px; align-items: center; }
+.roman p { line-height: 1.8; margin-bottom: 18px; }
+.note {                           /* phrase manuscrite sur papier */
+  background: var(--cream);
+  color: var(--black);
+  padding: 20px 24px;
+  font-family: var(--hand);
+  font-size: 1.6rem;
+  transform: rotate(-2deg);
+  box-shadow: 9px 9px 0 rgba(46, 33, 71, .35);
+  margin-bottom: 28px;
+}
+.main-page { overflow: visible; min-height: 0; background: none; }
+.main-page img:not(.scotch) {
+  height: auto;
+  box-shadow: 14px 14px 0 var(--purple-dark);
+  transform: rotate(2deg);
+}
+/* Morceau de scotch posé sur une photo.
+   On écrit "img.scotch" pour que cette règle passe avant ".photo img". */
+img.scotch,
+.photo img.scotch {
+  position: absolute;
+  width: 170px;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;           /* on peut cliquer "à travers" */
+}
+.main-page img.scotch,
+.main-page:hover img.scotch { top: -26px; left: 40%; transform: rotate(-6deg); }
+
+/* ---------- 11. Section 05 : nos clientes (ROSE clair) ---------- */
+.clientes { background: var(--pink-light); }
+.clientes .label { color: var(--purple); }
+.client-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; align-items: start; }
+.client-photo { position: relative; }
+.client-photo > img:first-child { border: 1px solid rgba(0, 0, 0, .12); }
+.client-photo .scotch { top: -22px; left: 30%; transform: rotate(4deg); }
+.copy p { line-height: 1.8; margin-bottom: 22px; }
+.quote {                          /* témoignage dans une bulle */
+  margin: 0 0 36px;
+  padding: 30px 35px;
+  border: 3px solid var(--black);
+  border-radius: 35px;
+  background: #fff;
+  font-family: var(--hand);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.25;
+  box-shadow: 8px 8px 0 var(--purple);
+}
+.quote cite {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--text);
+  font-style: normal;
+  font-size: .9rem;
+  color: #666;
+}
+
+/* ---------- 12. Section 06 : à propos (VIOLET foncé) ---------- */
+.info { background: var(--purple-dark); color: #fff; }
+.info .label { color: var(--pink); }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+.info h3 { font-family: var(--title); color: var(--pink); margin: 30px 0 12px; font-size: 1.3rem; }
+.info p, .info li { line-height: 1.8; opacity: .9; }
+.info ul { padding-left: 20px; }
+.info li { margin-bottom: 12px; }
+.info-card {                      /* phrase manuscrite sur papier rose */
+  background: var(--pink);
+  color: var(--black);
+  padding: 40px;
+  transform: rotate(1deg);
+  font-family: var(--hand);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  margin-bottom: 30px;
+}
+
+/* ---------- 13. Section 07 : infos pratiques (ROSE clair) ---------- */
+.infos-pratiques { background: var(--pink-light); }
+.infos-pratiques .label { color: var(--purple); }
+.practical { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.practical div { background: var(--purple); color: #fff; padding: 30px; }
+.practical img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 14px; }
+.practical h3 { font-family: var(--title); margin-bottom: 12px; }
+.practical p { line-height: 1.7; }
+
+/* ---------- 14. Section 08 : le design du site ---------- */
+.design { background: var(--cream); }
+.design .label { color: var(--purple); }
+.design-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.swatch { border: 2px solid var(--black); background: #fff; }
+.swatch .couleur { height: 110px; border-bottom: 2px solid var(--black); }
+.swatch div:last-child { padding: 18px; line-height: 1.6; }
+.swatch strong { font-family: var(--title); font-weight: normal; display: block; margin-bottom: 4px; }
+.design-note {
+  margin-top: 36px;
+  max-width: 820px;
+  font-family: var(--hand);
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+/* ---------- 15. Pied de page (VIOLET foncé) ---------- */
+footer { background: var(--purple-dark); color: #fff; padding: 65px 6vw 35px; border-top: 6px solid var(--pink); }
+.footer {
+  width: min(1350px, 100%);
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: end;
+}
+.footer .logo svg { width: 220px; }
+.footer p { max-width: 460px; line-height: 1.6; opacity: .85; font-size: .9rem; }
+.footer a { text-decoration: underline; }
+.footer a:hover { color: var(--orange); }
+
+/* ---------- 16. Agrandissement des photos (lightbox) ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .94);
+  z-index: 50;
+  display: none;
+  place-items: center;
+  padding: 30px;
+}
+.lightbox.active { display: grid; }
+.lightbox img { width: auto; max-width: 92vw; max-height: 88vh; object-fit: contain; }
+.close {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.close:hover { color: var(--orange); }
+
+/* ---------- 17. Tablette ---------- */
+@media (max-width: 950px) {
+  .hero, .roman-grid, .client-grid, .info-grid { grid-template-columns: 1fr; }
+  .hero-img { min-height: 60vh; }
+  .cards, .design-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-head { display: block; }
+  .gallery-head p { margin-top: 15px; }
+  .icone-titre { width: 80px; }
+}
+
+/* ---------- 18. Téléphone ---------- */
+@media (max-width: 640px) {
+  .entete { padding: .6rem 20px; }
+  .logo svg { width: 120px; }
+  .menu { gap: .9rem; }
+  .menu a { font-size: .85rem; }
+  .credit-haut { padding: .45rem 20px; }
+  section { padding: 75px 20px; }
+  .hero-copy { padding: 50px 20px; }
+  .sticker-bienvenue { width: 150px; }
+  .name-grid, .cards, .practical, .design-grid { grid-template-columns: 1fr; }
+  .name-card { padding: 28px; }
+  .grid { display: block; }
+  .grid .photo { margin-bottom: 12px; min-height: 320px; }
+  .icone-titre { width: 64px; }
+  .footer { display: block; }
+  .footer p { margin-top: 25px; }
+}
+
+/* =========================================================
+   AJOUTS : organisation "vrai salon"
+   ========================================================= */
+
+/* ---------- 19. Bouton "Prendre RDV" dans l'en-tête ---------- */
+.btn-rdv { padding: 10px 20px; font-size: .9rem; }
+
+/* ---------- 20. La carte des soins (comme un tableau de tarifs) ---------- */
+.carte-soins {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 40px;
+  background: var(--cream);
+  border: 3px solid var(--black);
+  padding: 40px;
+  box-shadow: 12px 12px 0 var(--black);
+}
+.soin { display: flex; gap: 18px; align-items: flex-start; }
+.soin img { width: 64px; height: 64px; object-fit: contain; flex-shrink: 0; }
+.soin > div { flex: 1; }
+.soin-ligne { display: flex; align-items: baseline; gap: 8px; }
+.soin-ligne h3 { font-family: var(--title); font-weight: normal; font-size: 1.15rem; }
+.points {                          /* les pointillés entre le nom et le prix */
+  flex: 1;
+  border-bottom: 3px dotted var(--black);
+  transform: translateY(-4px);
+  min-width: 20px;
+}
+.prix { font-family: var(--hand); font-size: 1.35rem; color: var(--blue); white-space: nowrap; }
+.soin p { line-height: 1.6; margin-top: 6px; color: #333; }
+
+/* ---------- 21. Avis des clientes ---------- */
+.avis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.avis { display: flex; flex-direction: column; gap: 30px; }
+.avis .client-photo img:first-child { height: 380px; object-fit: cover; }
+.avis .quote { margin: 0; font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+.vitrine-texte {
+  margin-top: 60px;
+  max-width: 820px;
+  background: #fff;
+  border-left: 8px solid var(--purple);
+  padding: 30px 35px;
+}
+.vitrine-texte h3 { font-family: var(--title); font-weight: normal; margin-bottom: 10px; }
+.vitrine-texte p { line-height: 1.8; }
+
+/* ---------- 22. L'équipe ---------- */
+.equipe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 60px; }
+.membre {
+  background: rgba(255, 255, 255, .06);
+  border: 2px solid var(--pink);
+  padding: 30px;
+}
+.membre img { width: 70px; height: 70px; object-fit: contain; margin-bottom: 12px; }
+.info .membre h3 { margin: 0; color: #fff; font-size: 1.5rem; }
+.membre .role { font-family: var(--hand); font-size: 1.3rem; color: var(--pink); opacity: 1; margin-bottom: 12px; }
+.philosophie h3:first-child { margin-top: 0; }
+
+/* ---------- 23. Rendez-vous ---------- */
+.infos-pratiques .cta { margin-top: 36px; }
+
+/* ---------- 24. Petits écrans pour les ajouts ---------- */
+@media (max-width: 950px) {
+  .menu { order: 3; width: 100%; }          /* le menu passe sous le logo */
+  .carte-soins, .avis-grid, .equipe-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .carte-soins { padding: 24px; box-shadow: 8px 8px 0 var(--black); }
+  .soin img { width: 48px; height: 48px; }
+  .soin-ligne { flex-wrap: wrap; }
+  .points { display: none; }
+  .avis .client-photo img:first-child { height: 280px; }
+}
+
+/* =========================================================
+   AJOUTS : site en plusieurs pages
+   ========================================================= */
+
+/* ---------- 25. Onglet actif dans le menu ---------- */
+.menu a.actif {
+  color: #fff;
+  border-bottom: 3px solid var(--orange);   /* on souligne la page où l'on est */
+  padding-bottom: 3px;
+}
+
+/* ---------- 26. Le contenu remplit au moins l'écran ---------- */
+main { min-height: calc(100vh - 140px); display: flex; flex-direction: column; }
+main > section:not(.hero) { flex: 1; }
+
+/* ---------- 27. Accueil : les espaces du salon ---------- */
+.espaces { background: var(--blue); color: #fff; padding-top: 40px; }
+.espaces .label { color: var(--yellow); }
+.espaces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.espace {
+  background: var(--cream);
+  color: var(--black);
+  border: 3px solid var(--black);
+  padding: 28px;
+  box-shadow: 8px 8px 0 var(--yellow);
+  transition: transform .2s, box-shadow .2s;
+}
+.espace:hover { transform: translate(-3px, -3px); box-shadow: 11px 11px 0 var(--orange); }
+.espace img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 12px; }
+.espace h3 { font-family: var(--title); font-weight: normal; font-size: 1.3rem; margin-bottom: 6px; }
+.espace p { line-height: 1.6; margin-bottom: 14px; }
+.espace-lien { font-weight: 800; color: var(--orange); }
+
+/* ---------- 28. Navigation "page précédente / suivante" ---------- */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 6vw;
+  background: var(--cream);
+  border-top: 3px solid var(--black);
+}
+.page-nav a {
+  font-weight: 800;
+  padding: 12px 22px;
+  border: 2px solid var(--black);
+  border-radius: 999px;
+  background: #fff;
+  transition: background .2s, color .2s;
+}
+.page-nav a:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
+
+@media (max-width: 950px) {
+  .espaces-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .espaces-grid { grid-template-columns: 1fr; }
+  .page-nav { flex-direction: column; padding: 20px; }
+  .page-nav a { text-align: center; }
+}
+@media (max-width: 640px) {
+  .icone-titre { display: none; }   /* sur téléphone, l'icône gênerait le titre */
+}
+
+/* ---------- 29. Galerie : le collage ---------- */
+.photo.collage {
+  min-height: 0;                /* le collage garde sa forme d'origine */
+  background: none;
+  border: 3px solid var(--black);
+  box-shadow: 12px 12px 0 var(--yellow);
+}
+.photo.collage img { height: auto; }
+.photo.collage:hover img { transform: none; }  /* pas de zoom au survol, l'image est déjà grande */
+
+/* =========================================================
+   AJOUTS : style "fait main" (post-its, polaroïds, annotations)
+   ========================================================= */
+
+/* ---------- 30. Annotations écrites à la main ---------- */
+.annot {
+  font-family: var(--hand);
+  font-size: 1.6rem;
+  line-height: 1.3;
+  transform: rotate(-2deg);
+  margin: -20px 0 30px;
+  display: inline-block;
+}
+.annot-blanc { color: #fff; }
+.annot-jaune { color: var(--yellow); }
+.titre-main { font-family: var(--hand); font-weight: normal; font-size: clamp(2.6rem, 5vw, 4rem); }
+
+/* ---------- 31. Accueil : des petits papiers de travers ---------- */
+.espace { text-align: center; padding: 26px 20px; }
+.espace img { margin: 0 auto 10px; }
+.espace span { font-family: var(--hand); font-size: 1.3rem; color: #555; }
+.espace:nth-child(odd)  { transform: rotate(-1.5deg); }
+.espace:nth-child(even) { transform: rotate(1.5deg); }
+.espace:hover { transform: rotate(0) translateY(-4px); }
+
+/* ---------- 32. Post-its ---------- */
+.postits {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.1fr;
+  gap: 36px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+.postit {
+  color: var(--black);
+  padding: 30px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  box-shadow: 6px 8px 0 rgba(0, 0, 0, .25);
+}
+.postit-jaune { background: var(--yellow); transform: rotate(-3deg); }
+.postit-blanc { background: var(--cream); transform: rotate(2deg); margin-top: 40px; }
+.postit-rose  { background: var(--pink); transform: rotate(-1deg); }
+.postit .gros {
+  font-family: var(--title);
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  line-height: 1;
+  color: var(--blue);
+  margin-bottom: 14px;
+}
+
+/* ---------- 33. Polaroïds ---------- */
+.polaroid {
+  position: relative;
+  background: #fff;
+  padding: 12px 12px 0;
+  box-shadow: 6px 8px 0 rgba(0, 0, 0, .2);
+}
+.polaroid > img:not(.scotch) { height: 300px; object-fit: cover; }
+.polaroid figcaption {
+  font-family: var(--hand);
+  font-size: 1.4rem;
+  text-align: center;
+  padding: 10px 0 12px;
+  color: var(--black);
+}
+.polaroid .scotch { top: -20px; left: 50%; transform: translateX(-50%) rotate(-4deg); width: 140px; }
+.polaroid-droite { transform: rotate(4deg); }
+
+/* ---------- 34. Salle d'attente ---------- */
+.court { max-width: 460px; }
+.spoiler {
+  font-family: var(--hand);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  line-height: 1.15;
+  margin: 26px 0 !important;
+}
+
+/* ---------- 35. Avis : un polaroïd droit, l'autre décalé ---------- */
+.avis .polaroid { transform: rotate(-2deg); }
+.avis-decale { margin-top: 60px; }
+.avis-decale .polaroid { transform: rotate(3deg); }
+.avis .client-photo img:first-child { height: auto; }
+.vitrine-postit { max-width: 560px; margin: 70px auto 0; }
+.vitrine-postit p + p { margin-top: 10px; }
+
+/* ---------- 36. Équipe : cartes un peu de travers ---------- */
+.membre:nth-child(1) { transform: rotate(-1.5deg); }
+.membre:nth-child(3) { transform: rotate(1.5deg); }
+.equipe-grid + .info-card { max-width: 640px; margin: 0 auto; }
+
+/* ---------- 37. Coulisses ---------- */
+.swatch div:last-child { font-family: var(--hand); font-size: 1.3rem; }
+.swatch strong { font-family: var(--title); font-size: 1rem; }
+
+@media (max-width: 950px) {
+  .postits { grid-template-columns: 1fr; }
+  .postit-blanc { margin-top: 0; }
+  .avis-decale { margin-top: 0; }
+}
+
+/* ---------- 38. Petits réglages ---------- */
+.nom { padding-top: 90px; }
+.cta + .annot { margin-top: 24px; }
+.practical div:nth-child(1) { transform: rotate(-1.5deg); }
+.practical div:nth-child(3) { transform: rotate(1.5deg); }
+
+/* ---------- 39. Pied de page compact ---------- */
+footer { padding: 18px 6vw; border-top-width: 4px; }
+.footer { align-items: center; gap: 24px; }
+.footer .logo svg { width: 90px; }
+.footer p { max-width: none; font-size: .8rem; line-height: 1.5; text-align: right; }
+@media (max-width: 640px) {
+  .footer { display: flex; flex-direction: column; text-align: center; }
+  .footer p { text-align: center; margin-top: 0; }
+}
+
+/* ---------- 40. Accueil : la photo du salon en fond ---------- */
+.hero-photo {
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 110px);
+  /* un voile bleu à gauche pour lire le texte, puis la photo bien visible à droite */
+  background:
+    linear-gradient(90deg, rgba(2, 70, 162, .95) 0%, rgba(2, 70, 162, .8) 32%, rgba(2, 70, 162, 0) 62%),
+    url('images/accueil-salon.jpg') 70% center / cover no-repeat;
+  position: relative;
+}
+.hero-photo::after {               /* la bande de carrelage jaune en bas */
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 22px;
+  background: repeating-linear-gradient(90deg, var(--yellow) 0 46px, #fff9 46px 48px);
+}
+.hero-photo .hero-copy { max-width: 640px; padding: 60px 6vw 80px; }
+.hero-photo h1, .hero-photo .welcome { text-shadow: 0 2px 12px rgba(0, 0, 0, .25); }
+
+@media (max-width: 950px) {
+  /* sur téléphone, le voile bleu couvre toute la photo pour garder le texte lisible */
+  .hero-photo {
+    background:
+      linear-gradient(180deg, rgba(2, 70, 162, .9) 0%, rgba(2, 70, 162, .7) 60%, rgba(2, 70, 162, .35) 100%),
+      url('images/accueil-salon.jpg') 62% center / cover no-repeat;
+  }
+}
+.hero-photo .hero-copy { padding: 40px 6vw 60px; }
+.hero-photo .sticker-bienvenue { width: 150px; margin-bottom: 18px; }
+.hero-photo h1 { font-size: clamp(3.5rem, 7vw, 6.5rem); }
+.hero-photo .sub { margin: 16px 0 18px; }
+.hero-photo .cta { margin-top: 24px; }
+
+/* ---------- 41. Accueil : texte + deux photos façon polaroïds ---------- */
+.hero-duo {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+  gap: 2vw;
+  min-height: calc(100vh - 110px);
+  background: var(--blue);
+  position: relative;
+  padding: 40px 6vw 70px;
+}
+.hero-duo::after {                 /* la bande de carrelage jaune en bas */
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 22px;
+  background: repeating-linear-gradient(90deg, var(--yellow) 0 46px, #fff9 46px 48px);
+}
+.hero-duo .hero-copy { padding: 0; }
+.hero-duo .sticker-bienvenue { width: 150px; margin-bottom: 18px; }
+.hero-duo h1 { font-size: clamp(3.5rem, 7vw, 6.5rem); }
+.hero-duo .sub { margin: 16px 0 18px; }
+.hero-duo .cta { margin-top: 24px; }
+
+.duo { position: relative; display: flex; gap: 0; align-items: center; padding: 30px 0; }
+.duo .polaroid { flex: 1; padding-bottom: 12px; }
+.duo .polaroid > img:not(.scotch) { height: auto; aspect-ratio: 9 / 10; object-fit: cover; }
+.duo-1 { transform: rotate(-4deg); z-index: 1; }
+.duo-2 { transform: rotate(3deg) translateY(30px); margin-left: -30px; z-index: 2; }
+.duo .sticker-ensemble {           /* la bulle posée entre les deux photos */
+  position: absolute;
+  right: 4%;
+  bottom: -10px;
+  width: min(260px, 55%);
+  z-index: 3;
+}
+
+@media (max-width: 950px) {
+  .hero-duo { grid-template-columns: 1fr; padding: 40px 20px 70px; }
+  .duo { max-width: 560px; margin: 10px auto 0; }
+}
+
+/* ---------- 42. Accueil : la même photo deux fois, texte par-dessus ---------- */
+.hero-diptyque {
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: calc(100vh - 110px);
+  overflow: hidden;
+  background: var(--blue);
+}
+.diptyque {                        /* les deux photos côte à côte, en fond */
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.diptyque img { height: 100%; object-fit: cover; }
+.hero-diptyque::before {           /* voile bleu à gauche pour lire le texte */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(2, 70, 162, .93) 0%, rgba(2, 70, 162, .75) 35%, rgba(2, 70, 162, 0) 60%);
+  z-index: 1;
+}
+.hero-diptyque::after {            /* la bande de carrelage jaune en bas */
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 22px;
+  background: repeating-linear-gradient(90deg, var(--yellow) 0 46px, #fff9 46px 48px);
+  z-index: 2;
+}
+.hero-diptyque .hero-copy { position: relative; z-index: 2; max-width: 640px; padding: 40px 6vw 70px; }
+.hero-diptyque .sticker-bienvenue { width: 150px; margin-bottom: 18px; }
+.hero-diptyque h1 { font-size: clamp(3.5rem, 7vw, 6.5rem); text-shadow: 0 2px 12px rgba(0, 0, 0, .25); }
+.hero-diptyque .sub { margin: 16px 0 18px; }
+.hero-diptyque .welcome { text-shadow: 0 2px 10px rgba(0, 0, 0, .3); }
+.hero-diptyque .cta { margin-top: 24px; }
+.hero-diptyque .sticker-ensemble { z-index: 2; right: 4%; bottom: 8%; width: min(280px, 40%); }
+
+@media (max-width: 950px) {
+  .diptyque { grid-template-columns: 1fr; }
+  .diptyque img + img { display: none; }   /* sur téléphone, une seule photo */
+  .hero-diptyque::before { background: rgba(2, 70, 162, .78); }
+  .hero-diptyque .sticker-ensemble { width: 200px; bottom: 40px; }
+}
+
+/* ---------- 43. Menu un peu plus serré sur les écrans moyens ---------- */
+@media (max-width: 1250px) and (min-width: 951px) {
+  .entete { padding: .6rem 3vw; }
+  .logo svg { width: 120px; }
+  .menu { gap: 1rem; }
+  .menu a { font-size: .88rem; }
+  .btn-rdv { padding: 9px 16px; font-size: .85rem; }
+}
+
+/* ---------- 44. Accueil : la photo en double, texte dans un encadré bleu ---------- */
+.hero-double {
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: calc(100vh - 110px);
+  overflow: hidden;
+  background: var(--blue);
+  padding: 50px 6vw 80px;
+}
+.hero-fond {                       /* la photo prend tout le fond */
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-double::after {              /* la bande de carrelage jaune en bas */
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 22px;
+  background: repeating-linear-gradient(90deg, var(--yellow) 0 46px, #fff9 46px 48px);
+  z-index: 2;
+}
+.hero-double .hero-copy {          /* l'encadré bleu, comme un bout de mur posé sur la photo */
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding: 36px 40px 40px;
+  background: rgba(2, 70, 162, .92);
+  border: 3px solid var(--black);
+  box-shadow: 10px 10px 0 var(--yellow);
+  transform: rotate(-1.5deg);
+}
+.hero-double .sticker-bienvenue { width: 140px; margin: -70px 0 10px -20px; }
+.hero-double h1 { font-size: clamp(3.2rem, 6vw, 5.5rem); }
+.hero-double .sub { margin: 14px 0 16px; }
+.hero-double .cta { margin-top: 22px; }
+.hero-double .sticker-ensemble { z-index: 2; right: 4%; bottom: 8%; width: min(280px, 40%); }
+
+@media (max-width: 640px) {
+  .hero-double { padding: 70px 16px 120px; }
+  .hero-double .hero-copy { padding: 28px 22px 30px; }
+  .hero-double .sticker-bienvenue { margin: -60px 0 8px -6px; }
+  .hero-double .sticker-ensemble { width: 190px; bottom: 36px; }
+}
+
+/* ---------- 45. Accueil moins haut : on voit la suite du premier coup ---------- */
+.hero-double { min-height: 0; height: clamp(380px, 52vh, 500px); padding: 30px 6vw 50px; }
+.hero-double .hero-copy { padding: 22px 30px 26px; max-width: 500px; }
+.hero-double .sticker-bienvenue { width: 110px; margin: -48px 0 4px -16px; }
+.hero-double h1 { font-size: clamp(2.6rem, 4.6vw, 4.2rem); }
+.hero-double h1 span { display: inline; }        /* "+237-4C" sur une seule ligne */
+.hero-double .sub { margin: 8px 0 10px; letter-spacing: .28em; font-size: .9rem; }
+.hero-double .welcome { font-size: 1.2rem; }
+.hero-double .cta { margin-top: 16px; }
+.hero-double .btn { padding: 12px 20px; }
+.espaces { padding-top: 40px; padding-bottom: 60px; }
+.espaces .titre-main { margin-bottom: 24px; }
+
+@media (max-width: 640px) {
+  .hero-double { height: auto; padding: 60px 16px 50px; }
+}
+
+/* ---------- 46. Police des titres : Bricolage Grotesque ----------
+   Une police "enseigne de boutique" : très grasse et un peu serrée. */
+h1, h2, .hero .sub, .name-card .code, .card h3, .soin-ligne h3, .postit .gros,
+.espace h3, .info h3, .practical h3, .vitrine-texte h3, .swatch strong, .membre h3 {
+  font-family: var(--title);
+  font-weight: 800;
+  font-stretch: 80%;            /* la version un peu étroite de la police */
+  letter-spacing: -0.02em;
+}
+.hero h1 { letter-spacing: -0.04em; }
+.hero .sub { letter-spacing: .3em; font-weight: 700; font-stretch: 100%; }
+
+/* =========================================================
+   47. ANIMATIONS
+   On utilise "translate" et "scale" (séparés de "transform")
+   pour ne pas casser les rotations des post-its et polaroïds.
+   ========================================================= */
+
+/* --- Apparition au défilement (avec animations.js) --- */
+.cache {
+  opacity: 0;
+  translate: 0 40px;
+  transition: opacity .7s ease, translate .7s cubic-bezier(.2, .8, .3, 1.2);
+}
+.cache.visible { opacity: 1; translate: 0 0; }
+
+/* --- Accueil : l'encadré bleu arrive comme un papier qu'on pose --- */
+@keyframes poser {
+  0%   { opacity: 0; translate: -60px 20px; scale: 1.08; }
+  70%  { opacity: 1; translate: 4px 0; scale: .99; }
+  100% { translate: 0 0; scale: 1; }
+}
+.hero-double .hero-copy { animation: poser .9s cubic-bezier(.2, .8, .3, 1) both; }
+
+/* --- Le sticker "Bienvenue" tombe puis se balance --- */
+@keyframes tomber {
+  0%   { opacity: 0; translate: 0 -80px; rotate: -25deg; }
+  60%  { opacity: 1; translate: 0 6px;  rotate: 6deg; }
+  100% { translate: 0 0; rotate: 0deg; }
+}
+@keyframes balancer {
+  0%, 100% { rotate: -3deg; }
+  50%      { rotate: 3deg; }
+}
+.sticker-bienvenue {
+  animation: tomber .8s .5s cubic-bezier(.3, 1.4, .5, 1) both,
+             balancer 4s 1.4s ease-in-out infinite;
+  transform-origin: top left;
+}
+
+/* --- Les boutons de l'accueil arrivent un peu après --- */
+@keyframes monter { from { opacity: 0; translate: 0 20px; } to { opacity: 1; translate: 0 0; } }
+.hero-double .welcome { animation: monter .6s .7s both; }
+.hero-double .cta     { animation: monter .6s .9s both; }
+
+/* --- Le bouton orange "respire" doucement pour attirer l'œil --- */
+@keyframes respirer {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(241, 99, 1, .55); }
+  50%      { box-shadow: 0 0 0 10px rgba(241, 99, 1, 0); }
+}
+.btn.primary { animation: respirer 2.4s ease-in-out infinite; }
+.hero-double .cta .btn.primary { animation: respirer 2.4s 1.6s ease-in-out infinite; }
+
+/* --- Le scotch frétille un peu --- */
+@keyframes fretiller {
+  0%, 100% { rotate: 0deg; }
+  50%      { rotate: 3deg; }
+}
+img.scotch { animation: fretiller 3s ease-in-out infinite; }
+
+/* --- Les icônes flottent légèrement --- */
+@keyframes flotter {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -6px; }
+}
+.icone-titre { animation: flotter 3.5s ease-in-out infinite; }
+.espace img, .membre img, .practical img { transition: rotate .3s, scale .3s; }
+.espace:hover img, .membre:hover img, .practical div:hover img { rotate: -10deg; scale: 1.15; }
+
+/* --- Au survol : les papiers se redressent et se soulèvent --- */
+.postit, .polaroid, .membre, .practical > div, .info-card, .note {
+  transition: opacity .7s ease, translate .4s cubic-bezier(.2, .8, .3, 1.4), scale .4s, box-shadow .3s;
+}
+.postit:hover, .polaroid:hover, .membre:hover, .practical > div:hover, .note:hover {
+  scale: 1.04;
+  translate: 0 -6px;
+  box-shadow: 10px 14px 0 rgba(0, 0, 0, .25);
+}
+
+/* --- La carte des soins : les pointillés se "dessinent" au survol --- */
+.soin .points { transform-origin: left; transition: scale .4s; }
+.soin:hover .points { scale: 1.02 1; border-bottom-color: var(--orange); }
+.soin:hover .prix { color: var(--orange); }
+.soin img { transition: rotate .3s; }
+.soin:hover img { rotate: -12deg; }
+
+/* --- Le soulignement orange du menu grandit au survol --- */
+.menu a { position: relative; }
+.menu a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 100%; height: 3px;
+  background: var(--orange);
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale .3s;
+}
+.menu a:hover::after { scale: 1 1; }
+.menu a.actif { border-bottom: 0; }
+.menu a.actif::after { scale: 1 1; }
+
+/* --- La bulle de citation "parle" (petit rebond à l'apparition) --- */
+.quote.visible { animation: parler .5s .2s ease-out; }
+@keyframes parler { 50% { scale: 1.04; } }
+
+/* --- Respecter les personnes qui n'aiment pas les animations --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .cache { opacity: 1; translate: none; }
+}
+
+/* ---------- 48. Infos pratiques : le plan animé ---------- */
+.plan-41 {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: 50px;
+  align-items: center;
+  margin-top: 50px;
+}
+.plan-video { transform: rotate(-2deg); }
+.plan-video video { width: 100%; display: block; background: var(--blue); }
+.plan-texte h3 { font-family: var(--title); font-weight: 800; font-stretch: 80%; font-size: 2rem; margin-bottom: 18px; }
+.plan-texte .annot { margin: 0 0 18px; color: var(--purple); }
+.plan-texte p { line-height: 1.7; font-size: 1.1rem; }
+@media (max-width: 760px) {
+  .plan-41 { grid-template-columns: 1fr; }
+  .plan-video { max-width: 320px; margin: 0 auto; }
+}
+
+/* ---------- 49. Page vidéo ---------- */
+.presentation-video { max-width: 900px; margin: 30px auto 0; transform: rotate(-1deg); }
+.presentation-video video { width: 100%; display: block; background: var(--black); }
+
+/* ---------- 50. Bande noire : le crédit de l'œuvre, plus visible ---------- */
+.credit-haut {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  padding: .75rem 6vw;
+  font-size: .95rem;
+  line-height: 1.4;
+  border-bottom: 3px solid var(--orange);
+}
+.credit-label {
+  font-family: var(--hand);
+  font-size: 1.15rem;
+  color: var(--yellow);
+}
+.credit-oeuvre { font-size: 1.05rem; }
+.credit-oeuvre strong { font-weight: 700; }
+.credit-lieu { opacity: .75; font-size: .85rem; }
+@media (max-width: 640px) {
+  .credit-haut { padding: .6rem 20px; gap: 2px 10px; }
+  .credit-lieu { flex-basis: 100%; }
+}
